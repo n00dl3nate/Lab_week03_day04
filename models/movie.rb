@@ -76,33 +76,15 @@ attr_accessor :title, :genre ,:budget
 
     results = SqlRunner.run(sql,[@id])
 
-    remainder = results.map do |hash|
+    fees = results.map{|casting| casting['fee']}
 
-    result = hash[0]['fee']
-    # casting1 = hash
-    #
-    # casting_fees = casting1.map{|casting| casting.fee}
-    #
-    # p casting_fees
+    actor_total = 0
 
+    fees.each {|amount| actor_total += amount.to_i}
 
-     end
-
-
-
-
-
-     # total = 0
-     # order.each { |fee| total += fee[0]['fee'].to_i }
-     # return total
+    return total = @budget - actor_total
 
 
   end
-
-
-
-
-
-
 
 end

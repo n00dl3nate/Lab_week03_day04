@@ -9,12 +9,14 @@ Actor.delete_all
 Role.delete_all
 movie1 = Movie.new({
   "title" => "Fight Club",
-  "genre" => "Drama"
+  "genre" => "Drama",
+  "budget" => 30000000
   })
 
 movie2 = Movie.new({
   "title" => "The Nun",
-  "genre" => "Horror"
+  "genre" => "Horror",
+  "budget" => 20000000
     })
 
     movie1.save
