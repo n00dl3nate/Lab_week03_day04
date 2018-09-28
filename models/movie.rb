@@ -3,13 +3,14 @@ require_relative("../db/sql_runner")
 class Movie
 
 attr_reader :id
-attr_accessor :title, :genre
+attr_accessor :title, :genre ,:budget
 
   def initialize(options)
 
     @id = options['id'].to_i if options['id']
     @title = options['title']
     @genre = options['genre']
+    @budget = options['budget']
 
   end
 
@@ -60,9 +61,48 @@ attr_accessor :title, :genre
   actors = results.map do |order_hash|
 
   Actor.new(order_hash)
-end
 
-end
+    end
+
+  end
+
+  def remainder
+
+    sql = "SELECT roles.fee
+	   FROM actors
+     INNER JOIN roles
+     ON roles.actor_id = actors.id
+     WHERE roles.movie_id = $1;"
+
+    results = SqlRunner.run(sql,[@id])
+
+    remainder = results.map do |hash|
+
+    result = hash[0]['fee']
+    # casting1 = hash
+    #
+    # casting_fees = casting1.map{|casting| casting.fee}
+    #
+    # p casting_fees
+
+
+     end
+
+
+
+
+
+     # total = 0
+     # order.each { |fee| total += fee[0]['fee'].to_i }
+     # return total
+
+
+  end
+
+
+
+
+
 
 
 end
